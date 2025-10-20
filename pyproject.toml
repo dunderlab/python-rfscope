@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rfscope"
+version = "0.1.0"
+description = "RF Scope Utilities"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "BSD-2-Clause" }
+authors = [
+    { name = "Yeison Cardona", email = "yencardonaal@unal.edu.co" }
+]
+maintainers = [
+    { name = "Yeison Cardona", email = "yencardonaal@unal.edu.co" }
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "numpy",
+]
+
+[project.urls]
+"Repository" = "https://github.com/dunderlab/python-rfscope"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rfscope"]
+
+[project.optional-dependencies]
+dev = [
+    "colorama",
+]
+
+docs = [
+    "matplotlib",
+]
+
+testing = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
