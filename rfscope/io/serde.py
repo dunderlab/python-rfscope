@@ -1,0 +1,1 @@
+# Lectura/escritura CSV/JSON/XML para offline

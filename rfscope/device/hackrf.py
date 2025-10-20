@@ -1,0 +1,1 @@
+# Parametrización HackRF One (SR, BW, ganancia, barridos)

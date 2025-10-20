@@ -1,13 +1,15 @@
+# **Servicio único**: ruido + picos + potencia + ocupación (OBW 99%, −XdB)
+
 from numpy import log10
+
 
 class RfUtils:
     """"""
-    
+
     @staticmethod
     def refer_psd_to_isotropic(psd_dbm_hz: float, ant_gain_dbi: float) -> float:
         """"""
         return psd_dbm_hz - ant_gain_dbi
-
 
     @staticmethod
     def v2hz_to_dbm_hz(v2_hz, impedance_ohm):
