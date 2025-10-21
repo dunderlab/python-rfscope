@@ -1,5 +1,5 @@
-rfscope.io package
-==================
+
+
 
 .. automodule:: rfscope.io
    :members:

@@ -1,5 +1,5 @@
-rfscope.tests package
-=====================
+
+
 
 .. automodule:: rfscope.tests
    :members:

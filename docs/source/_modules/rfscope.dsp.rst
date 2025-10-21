@@ -1,5 +1,5 @@
-rfscope.dsp package
-===================
+
+
 
 .. automodule:: rfscope.dsp
    :members:

@@ -1,5 +1,5 @@
-rfscope.hackrf package
-======================
+
+
 
 .. automodule:: rfscope.hackrf
    :members:

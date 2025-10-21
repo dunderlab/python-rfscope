@@ -1,5 +1,5 @@
-rfscope.common package
-======================
+
+
 
 .. automodule:: rfscope.common
    :members:
