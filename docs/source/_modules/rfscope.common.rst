@@ -6,6 +6,14 @@
    :undoc-members:
    :show-inheritance:
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   rfscope.common.utils
+
 Submodules
 ----------
 
@@ -14,4 +22,3 @@ Submodules
 
    rfscope.common.models
    rfscope.common.units
-   rfscope.common.utils
