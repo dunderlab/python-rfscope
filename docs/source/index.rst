@@ -11,6 +11,7 @@ Documentation Overview
    :name: mastertoc
 
    notebooks/planning
+   notebooks/ssh_signed_request_auth
 
 
 
