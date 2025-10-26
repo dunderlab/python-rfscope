@@ -235,9 +235,9 @@ def plan_capture_parameters(
 
     return {
         "sample_rate": float(fs_hz),
-        "samples": total_samples,
+        "num_samples": total_samples,
         "rbw_eff": float(rbw_eff),
-        "time": total_time,
+        "total_time_s": total_time,
     }
 
 
