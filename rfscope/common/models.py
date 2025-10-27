@@ -50,7 +50,9 @@ class IQFrame:
 
     def __post_init__(self) -> None:
         """Validate and normalize fields."""
-        object.__setattr__(self, "samples", _ensure_np_array(self.samples, np.complex64))
+        object.__setattr__(
+            self, "samples", _ensure_np_array(self.samples, np.complex64)
+        )
         if self.samples.ndim not in (1, 2):
             raise ValueError("samples must be 1-D (N,) or 2-D (K, N)")
         if not np.isfinite(self.fs_hz) or self.fs_hz <= 0:
@@ -58,7 +60,9 @@ class IQFrame:
         if not np.isfinite(self.center_freq_hz) or self.center_freq_hz <= 0:
             raise ValueError("center_freq_hz must be a positive finite float")
         if not np.isfinite(self.impedance_ohm) or self.impedance_ohm <= 0:
-            raise ValueError("impedance_ohm must be a positive finite float (e.g., 50.0)")
+            raise ValueError(
+                "impedance_ohm must be a positive finite float (e.g., 50.0)"
+            )
 
     @property
     def n_channels(self) -> int:
@@ -138,7 +142,9 @@ class SpectrumFrame:
             raise ValueError("rbw_hz must be a positive finite float")
         if self.averages < 1:
             raise ValueError("averages must be >= 1")
-        if self.vbw_hz is not None and (not np.isfinite(self.vbw_hz) or self.vbw_hz <= 0):
+        if self.vbw_hz is not None and (
+            not np.isfinite(self.vbw_hz) or self.vbw_hz <= 0
+        ):
             raise ValueError("vbw_hz, when provided, must be a positive finite float")
         if not np.isfinite(self.f_start_hz):
             raise ValueError("f_start_hz must be finite")
@@ -193,7 +199,10 @@ class SpectrumFrame:
         ValueError
             If `f_low_hz` or `f_high_hz` are invalid or no bins fall within range.
         """
-        if not (np.isfinite(f_low_hz) and np.isfinite(f_high_hz)) or f_low_hz >= f_high_hz:
+        if (
+            not (np.isfinite(f_low_hz) and np.isfinite(f_high_hz))
+            or f_low_hz >= f_high_hz
+        ):
             raise ValueError("Invalid band limits")
 
         idx = np.nonzero(
@@ -212,4 +221,17 @@ class SpectrumFrame:
             averages=self.averages,
             noise_floor_dbm_per_hz=self.noise_floor_dbm_per_hz,
             metadata=dict(self.metadata),
+        )
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, SpectrumFrame):
+            return NotImplemented
+        return (
+            np.allclose(self.psd_dbm_per_hz, other.psd_dbm_per_hz)
+            and self.rbw_hz == other.rbw_hz
+            and self.f_start_hz == other.f_start_hz
+            and self.vbw_hz == other.vbw_hz
+            and self.window == other.window
+            and self.averages == other.averages
+            and self.noise_floor_dbm_per_hz == other.noise_floor_dbm_per_hz
         )
