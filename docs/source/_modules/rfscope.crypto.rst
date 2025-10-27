@@ -1,7 +1,7 @@
 
 
 
-.. automodule:: rfscope.dsp
+.. automodule:: rfscope.crypto
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,6 +12,4 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   rfscope.dsp.analysis
-   rfscope.dsp.spectral
-   rfscope.dsp.spectrum_codec
+   rfscope.crypto.api_requests

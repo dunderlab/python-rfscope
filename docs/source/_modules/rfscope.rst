@@ -14,6 +14,7 @@ Subpackages
 
    rfscope.audio
    rfscope.common
+   rfscope.crypto
    rfscope.device
    rfscope.dsp
    rfscope.hackrf
