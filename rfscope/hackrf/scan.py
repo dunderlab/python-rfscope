@@ -13,16 +13,14 @@ ScanHackRF
     A subclass of HackRF that adds asynchronous frequency scanning capabilities.
 """
 
-from hackrf.core import HackRF
+from rfscope.hackrf.core import HackRF
 import logging
 from typing import Callable
-
 
 
 class ScanHackRF(HackRF):
     """"""
 
-    
     def __init__(self, *args: tuple, **kwargs: dict):
         """
         Initialize the ScanHackRF object.
@@ -40,7 +38,6 @@ class ScanHackRF(HackRF):
         super().__init__(*args, **kwargs)
         # self.scan_event = asyncio.Event()
 
-    
     def scan(
         self,
         bands: list[float],
@@ -51,6 +48,7 @@ class ScanHackRF(HackRF):
         buffer_num_blocks: int = 1,
         callback: Callable[[dict], None] = None,
         interleaved: bool = False,
+        blocks_per_callback: int = 1,
     ) -> None:
         r"""
         Perform a frequency band sweep scan and process the data asynchronously.
@@ -76,6 +74,8 @@ class ScanHackRF(HackRF):
             If None, it defaults to the internal `_callback` method.
         interleaved : bool, optional
             If True, enable interleaved sweep mode. Default is False.
+        blocks_per_callback: int, optional
+            Subsample rate for sweep callback; defines how often _sweep_pipe_function is called.
 
         Returns
         -------
@@ -90,6 +90,9 @@ class ScanHackRF(HackRF):
         block_size = 16384
         self.sample_rate = sample_rate
 
+        if blocks_per_callback > 1:
+            buffer_num_blocks = read_num_blocks * blocks_per_callback
+
         self.start_sweep(
             bands,
             pipe_function=(self._callback if callback is None else callback),
@@ -98,12 +101,10 @@ class ScanHackRF(HackRF):
             step_offset=step_offset,
             interleaved=interleaved,
             buffer_size=block_size * buffer_num_blocks,
+            blocks_per_callback=blocks_per_callback,
         )
 
-    
-    def _callback(
-        self, data_freqs: dict[float, list], sweep_config: dict
-    ) -> bool:
+    def _callback(self, data_freqs: dict[float, list], sweep_config: dict) -> bool:
         """
         Process the frequency data gathered during the sweep scan.
 
