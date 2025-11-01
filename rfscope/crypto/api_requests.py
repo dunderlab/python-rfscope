@@ -181,6 +181,7 @@ def signed_request(
     key_id: str | None = None,
     extra_headers: dict | None = None,
     verify_tls: bool | str = True,
+    content_type: str = "application/json",
 ) -> requests.Response:
     """
     Send an HTTP request signed with an Ed25519 SSH key.
@@ -203,6 +204,8 @@ def signed_request(
         Additional HTTP headers to include.
     verify_tls : bool or str, default=True
         TLS verification setting (True, False, or path to CA bundle).
+    content_type: str, optional
+        Content type (e.g. "application/json").
 
     Returns
     -------
@@ -237,7 +240,7 @@ def signed_request(
         "X-SSH-Key-Id": fp,
         "X-SSH-Signature-Alg": "ssh-ed25519",
         "X-SSH-Signature": signature_b64,
-        "Content-Type": "application/json",
+        "Content-Type": content_type,
     }
 
     if extra_headers:
